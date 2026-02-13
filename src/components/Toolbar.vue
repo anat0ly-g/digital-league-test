@@ -7,8 +7,12 @@ const modeStore = useModeStore();
 
 <template>
     <div class="toolbar">
-        <Button @click="modeStore.setMode('draw')">Кисть</Button>
-        <Button @click="modeStore.setMode('erase')">Ластик</Button>
+        <Button @click="modeStore.setMode('draw')" :class="{ active: modeStore.mode == 'draw' }"
+            >Кисть</Button
+        >
+        <Button @click="modeStore.setMode('erase')" :class="{ active: modeStore.mode == 'erase' }"
+            >Ластик</Button
+        >
     </div>
 </template>
 
@@ -23,5 +27,9 @@ const modeStore = useModeStore();
     padding: 10px 20px;
     border: 2px solid darkblue;
     border-radius: 5px;
+}
+
+.active {
+    background-color: lightblue;
 }
 </style>

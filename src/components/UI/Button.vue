@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-    <button v-bind="$attrs" class="button"><slot /></button>
+    <button class="button"><slot /></button>
 </template>
 
 <style scoped>
