@@ -2,7 +2,7 @@ import { ref, watchEffect, type Ref } from 'vue';
 import * as draw from '../logic/canvas/draw';
 import * as erase from '../logic/canvas/erase';
 import * as canvasUtils from '../logic/canvas/utils';
-import { useModeStore } from '../store/modeStore';
+import { useCanvasStore } from '../store/canvasStore';
 
 export type CanvasOperations = 'draw' | 'erase';
 interface OperationSteps {
@@ -27,7 +27,7 @@ const canvasOperations: Record<CanvasOperations, OperationSteps> = {
 export function useCanvasAction(canvas: Ref<HTMLCanvasElement | null, HTMLCanvasElement | null>) {
     const canvasContext = ref<CanvasRenderingContext2D | null>(null);
     const isActingOnCanvas = ref(false);
-    const modeStore = useModeStore();
+    const modeStore = useCanvasStore();
 
     watchEffect(() => {
         if (!canvas.value) return;

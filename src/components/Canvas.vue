@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { storeToRefs } from 'pinia';
 import { useCanvasAction } from '../composables/useCanvasAction';
+import { useCanvasStore } from '../store/canvasStore';
 
-const canvas = ref<HTMLCanvasElement | null>(null);
+const {canvas} = storeToRefs(useCanvasStore());
 const { startAction, action, stopAction } = useCanvasAction(canvas);
+
 </script>
 
 <template>

@@ -1,18 +1,21 @@
 <script setup lang="ts">
-import { useModeStore } from '../store/modeStore';
+import { useCanvasStore } from '../store/canvasStore';
 import Button from './UI/Button.vue';
 
-const modeStore = useModeStore();
+const canvasStore = useCanvasStore();
 </script>
 
 <template>
     <div class="toolbar">
-        <Button @click="modeStore.setMode('draw')" :class="{ active: modeStore.mode == 'draw' }"
+        <Button @click="canvasStore.setMode('draw')" :class="{ active: canvasStore.mode == 'draw' }"
             >Кисть</Button
         >
-        <Button @click="modeStore.setMode('erase')" :class="{ active: modeStore.mode == 'erase' }"
+        <Button
+            @click="canvasStore.setMode('erase')"
+            :class="{ active: canvasStore.mode == 'erase' }"
             >Ластик</Button
         >
+        <Button @click="canvasStore.clearCanvas">Очистить</Button>
     </div>
 </template>
 
