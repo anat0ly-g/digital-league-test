@@ -1,16 +1,18 @@
 <script setup lang="ts"></script>
 
 <template>
-    <button class="button"><slot></slot></button>
+    <label class="label">
+        <slot></slot>
+        <input class="visually-hidden" type="file" v-bind="$attrs" />
+    </label>
 </template>
 
 <style scoped>
-.button {
+.label {
+    text-wrap: nowrap;
     padding: 5px 10px;
     border: 1px solid blue;
     border-radius: 5px;
-    background-color: transparent;
-    font: inherit;
     cursor: pointer;
 }
 </style>
