@@ -1,21 +1,23 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
-import { useCanvasAction } from '../composables/useCanvasAction';
+import { useCanvasEvents } from '../composables/useCanvasEvents';
+import { useCanvasResize } from '../composables/useCanvasResize';
 import { useCanvasStore } from '../store/canvasStore';
 
-const {canvas} = storeToRefs(useCanvasStore());
-const { startAction, action, stopAction } = useCanvasAction(canvas);
+const { canvasRef } = storeToRefs(useCanvasStore());
+const { onStart, onMove, onEnd } = useCanvasEvents();
 
+useCanvasResize();
 </script>
 
 <template>
     <canvas
         id="canvas"
-        ref="canvas"
-        @mousedown="startAction"
-        @mousemove="action"
-        @mouseup="stopAction"
-        @mouseleave="stopAction"
+        ref="canvasRef"
+        @mousedown="onStart"
+        @mousemove="onMove"
+        @mouseup="onEnd"
+        @mouseleave="onEnd"
     ></canvas>
 </template>
 

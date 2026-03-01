@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import { useCanvasActions } from '../composables/useCanvasActions';
 import { useCanvasStore } from '../store/canvasStore';
 import Button from './UI/Button.vue';
 
 const canvasStore = useCanvasStore();
+const { clearCanvas } = useCanvasActions();
 </script>
 
 <template>
@@ -15,7 +17,7 @@ const canvasStore = useCanvasStore();
             :class="{ active: canvasStore.mode == 'erase' }"
             >Ластик</Button
         >
-        <Button @click="canvasStore.clearCanvas">Очистить</Button>
+        <Button @click="clearCanvas">Очистить</Button>
     </div>
 </template>
 

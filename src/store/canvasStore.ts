@@ -1,25 +1,18 @@
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
-import type { CanvasOperations } from '../composables/useCanvasAction';
-import { clear } from '../logic/canvas/clear';
+import { computed, ref } from 'vue';
+import type { CanvasOperations } from '../types/canvasTypes';
 
-export const useCanvasStore = defineStore('modeStore', () => {
+export const useCanvasStore = defineStore('canvasStore', () => {
     const mode = ref<CanvasOperations>('draw');
-    const canvas = ref<HTMLCanvasElement | null>(null);
+    const canvasRef = ref<HTMLCanvasElement | null>(null);
+
+    const canvasContext = computed(() => {
+        return canvasRef.value?.getContext('2d') || null;
+    });
 
     function setMode(newMode: CanvasOperations) {
         mode.value = newMode;
     }
 
-    function clearCanvas() {
-        if (!canvas.value) return;
-
-        const ctx = canvas.value.getContext('2d');
-
-        if (!ctx) return;
-
-        clear(ctx, canvas.value.width, canvas.value.height);
-    }
-
-    return { mode, setMode, canvas, clearCanvas };
+    return { mode, setMode, canvasRef, canvasContext };
 });
