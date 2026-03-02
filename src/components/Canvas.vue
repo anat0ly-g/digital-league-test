@@ -3,11 +3,13 @@ import { storeToRefs } from 'pinia';
 import { useCanvasEvents } from '../composables/useCanvasEvents';
 import { useCanvasResize } from '../composables/useCanvasResize';
 import { useCanvasStore } from '../store/canvasStore';
+import { useCanvasHotkeys } from '../composables/useCanvasHotkeys';
 
 const { canvasRef } = storeToRefs(useCanvasStore());
 const { onStart, onMove, onEnd } = useCanvasEvents();
 
 useCanvasResize();
+useCanvasHotkeys();
 </script>
 
 <template>

@@ -42,6 +42,8 @@ export function useCanvasEvents() {
 
         canvasOperations[canvasStore.mode].end(canvasStore.canvasContext);
         isDrawing = false;
+
+        canvasStore.saveHistoryState();
     }
 
     return { onStart, onMove, onEnd };

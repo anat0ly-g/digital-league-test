@@ -13,4 +13,9 @@
     font: inherit;
     cursor: pointer;
 }
+
+.button:disabled {
+    border-color: lightblue;
+    cursor: default;
+}
 </style>

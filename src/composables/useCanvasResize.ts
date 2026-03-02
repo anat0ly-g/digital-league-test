@@ -8,7 +8,9 @@ export function useCanvasResize() {
     function handleResize() {
         if (!canvasStore.canvasRef) return;
 
+        canvasStore.clearHistory();
         canvasUtils.resizeCanvas(canvasStore.canvasRef);
+        canvasStore.initHistory();
     }
 
     onMounted(() => {

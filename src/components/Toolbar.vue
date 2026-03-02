@@ -23,6 +23,11 @@ function handleFileInput(event: Event) {
 
 <template>
     <div class="toolbar">
+        <Button @click="canvasStore.undo" :disabled="!canvasStore.canUndo"><</Button>
+        <Button @click="canvasStore.redo" :disabled="!canvasStore.canRedo">></Button>
+
+        <div class="divider"></div>
+
         <Button @click="canvasStore.setMode('draw')" :class="{ active: canvasStore.mode == 'draw' }"
             >Кисть</Button
         >
@@ -31,7 +36,9 @@ function handleFileInput(event: Event) {
             :class="{ active: canvasStore.mode == 'erase' }"
             >Ластик</Button
         >
-        |
+
+        <div class="divider"></div>
+
         <Button @click="clearCanvas">Очистить</Button>
         <FileInput accept="image/*" @change="handleFileInput">Загрузить изображение</FileInput>
         <Button @click="saveCanvasAsPNG">Сохранить как PNG</Button>
@@ -55,5 +62,13 @@ function handleFileInput(event: Event) {
 
 .active {
     background-color: lightblue;
+}
+
+.divider {
+    align-self: stretch;
+    flex-shrink: 0;
+    width: 2px;
+    border-radius: 2px;
+    background-color: darkblue;
 }
 </style>

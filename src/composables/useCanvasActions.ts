@@ -11,6 +11,8 @@ export function useCanvasActions() {
         if (!canvasStore.canvasContext) return;
 
         clear(canvasStore.canvasContext, canvasStore.canvasRef.width, canvasStore.canvasRef.height);
+
+        canvasStore.saveHistoryState();
     }
 
     async function loadImage(file: File) {
@@ -26,6 +28,8 @@ export function useCanvasActions() {
                 canvasStore.canvasRef.height,
                 img,
             );
+
+            canvasStore.saveHistoryState();
         } catch (error) {
             alert('Не удалось загрузить изображение');
         }
