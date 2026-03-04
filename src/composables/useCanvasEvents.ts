@@ -1,10 +1,11 @@
+import { ref } from 'vue';
 import { canvasOperations } from '../logic/canvas/operations';
 import * as canvasUtils from '../logic/canvas/utils';
 import { useCanvasStore } from '../store/canvasStore';
 
 export function useCanvasEvents() {
     const canvasStore = useCanvasStore();
-    let isDrawing: boolean = false;
+    const isDrawing = ref(false);
 
     function getCanvasCoords(event: MouseEvent) {
         if (!canvasStore.canvasRef) return { x: 0, y: 0 };
@@ -18,14 +19,14 @@ export function useCanvasEvents() {
         if (!canvasStore.canvasContext) return;
 
         event.preventDefault();
-        isDrawing = true;
+        isDrawing.value = true;
 
         const { x, y } = getCanvasCoords(event);
         canvasOperations[canvasStore.mode].start(canvasStore.canvasContext, x, y);
     }
 
     function onMove(event: MouseEvent) {
-        if (!isDrawing) return;
+        if (!isDrawing.value) return;
 
         if (!canvasStore.canvasContext) return;
 
@@ -36,12 +37,12 @@ export function useCanvasEvents() {
     }
 
     function onEnd() {
-        if (!isDrawing) return;
+        if (!isDrawing.value) return;
 
         if (!canvasStore.canvasContext) return;
 
         canvasOperations[canvasStore.mode].end(canvasStore.canvasContext);
-        isDrawing = false;
+        isDrawing.value = false;
 
         canvasStore.saveHistoryState();
     }

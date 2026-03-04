@@ -5,12 +5,12 @@ export function useCanvasHotkeys() {
     const canvasStore = useCanvasStore();
 
     function handleKeyDown(event: KeyboardEvent) {
-        if (event.ctrlKey && !event.shiftKey && event.key.toLowerCase() == 'z') {
+        if (event.ctrlKey && !event.shiftKey && event.code == 'KeyZ') {
             event.preventDefault();
             canvasStore.undo();
         }
 
-        if (event.ctrlKey && event.shiftKey && event.key.toLowerCase() == 'z') {
+        if (event.ctrlKey && event.shiftKey && event.code == 'KeyZ') {
             event.preventDefault();
             canvasStore.redo();
         }
